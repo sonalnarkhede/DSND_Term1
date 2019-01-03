@@ -1,11 +1,13 @@
-# Data Scientist Project
+# Data Science Project on Image classification using Deep learning
+## Developing an AI application
 
-Project code for Udacity's Data Scientist Nanodegree program. In this project, you will first develop code for an image classifier built with PyTorch, then you will convert it into a command line application.
+Going forward, AI algorithms will be incorporated into more and more everyday applications. For example, you might want to include an image classifier in a smart phone app. To do this, you'd use a deep learning model trained on hundreds of thousands of images as part of the overall application architecture. A large part of software development in the future will be using these types of models as common parts of applications.
 
-In order to complete this project, you will need to use the GPU enabled workspaces within the classroom.  The files are all available here for your convenience, but running on your local CPU will likely not work well.
+In this project, I have trained an image classifier to recognize different species of flowers. You can imagine using something like this in a phone app that tells you the name of the flower your camera is looking at. In practice you'd train this classifier, then export it for use in your application. 
 
-You should also only enable the GPU when you need it. If you are not using the GPU, please disable it so you do not run out of time!
+The project is broken down into multiple steps:
+- Load and preprocess the image dataset
+- Train the image classifier on your dataset
+- Use the trained classifier to predict image content
 
-### Data
-
-The data for this project is quite large - in fact, it is so large you cannot upload it onto Github.  If you would like the data for this project, you will want download it from the workspace in the classroom.  Though actually completing the project is likely not possible on your local unless you have a GPU.  You will be training using 102 different types of flowers, where there ~20 images per flower to train on.  Then you will use your trained classifier to see if you can predict the type for new images of the flowers.
+This project uses PyTorch and the torchvision package; the Jupyter Notebook walks through the implementation of the image classifier and shows an example of the classifier's prediction on a test image. The classifier was also converted into a python application which could be run from command line using "train.py" and "predict.py".
