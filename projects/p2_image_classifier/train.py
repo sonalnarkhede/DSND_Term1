@@ -1,13 +1,14 @@
 '''
 Train a deep learning network to identify different classes of flowers for a given image or a set of images
 
-Basic usage: python train.py data_directory
+Basic usage: python train.py data_dir --gpu
 Prints out training loss, validation loss, and validation accuracy as the network trains
 Options:
-Set directory to save checkpoints: python train.py data_dir --save_dir save_directory
-Choose architecture: python train.py data_dir --arch "vgg13"
-Set hyperparameters: python train.py data_dir --learning_rate 0.01 --hidden_units 512 --epochs 20
 Use GPU for training: python train.py data_dir --gpu
+Choose architecture:
+python train.py data_dir --arch VGG --gpu
+python train.py data_dir --arch DenseNet --gpu
+Set hyperparameters: python train.py data_dir --learning_rate 0.003 --hidden_units 4096 --epochs 10 --gpu
 '''
 
 # Imports here
@@ -45,11 +46,11 @@ def main():
     #Load datasets
     train_data, trainloader, validloader, testloader = utilities.load_data(data_dir)
     print("Loaded the datasets!")
-    
+
     #Load the pretrained model
     pretrained_model = functions.pretrained_model(arch)
     print("Loaded the pretrained model!")
-    
+
     # Get pretrained model name
     model_name = pretrained_model.__class__.__name__
 
@@ -70,7 +71,7 @@ def main():
     #Build the model
     model = functions.build_model(arch, input_size, hidden_layers, output_size, dropout_rate, device)
     print("Built the model architecture!")
-    
+
     #Define the loss criterion
     criterion = nn.NLLLoss()
 
@@ -82,7 +83,7 @@ def main():
     print("Model training started!")
     functions.train_model(model, trainloader, validloader, epochs, print_every, criterion, optimizer, device)
     print("Model training completed!")
-    
+
     print("Model testing started!")
     functions.test_accuracy(model, testloader, criterion)
     print("Model testing completed!")
