@@ -63,7 +63,7 @@ def build_model(arch, input_size, hidden_layers, output_size, dropout_rate, devi
 
     if torch.cuda.is_available() and device == "gpu":
         model.cuda()
-            
+
     return model
 
 def train_model(model, trainloader, validloader, epochs, print_every, criterion, optimizer, device='cpu'):
@@ -90,7 +90,7 @@ def train_model(model, trainloader, validloader, epochs, print_every, criterion,
             inputs, labels = inputs.to(device), labels.to(device)
 
             optimizer.zero_grad() #Initialize optimizer to zero gradient for every training batch
-            
+
             model.to(device)
             logps = model.forward(inputs) #calculate log probability
             loss = criterion(logps, labels) #calculate the loss
@@ -141,7 +141,7 @@ def validation(model, validloader, criterion):
             accuracy += torch.mean(equals.type(torch.FloatTensor)).item()
             #equals = (labels.data == pv.max(dim=1)[1])
             #accuracy += equals.type(torch.FloatTensor).mean()
-            
+
         model.train()
 
         return valid_loss, accuracy

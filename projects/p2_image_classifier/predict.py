@@ -36,7 +36,7 @@ def main():
     checkpoint = in_args.checkpoint
     category_names = in_args.category_names
     top_k = in_args.top_k
-    device = 'gpu' if in_args.gpu == 'gpu' else 'cpu'
+    device = 'gpu' if in_args.gpu else 'cpu'
 
     #Load checkpoint
     model, input_size, hidden_layers, output_size, epochs, state_dict, optimizer_state, checkpoint, class_to_idx = functions.load_checkpoint(checkpoint)
@@ -46,10 +46,15 @@ def main():
     probs, classes = helper.predict(image_path, model, class_to_idx, top_k, device)
 
     cat_to_name = functions.map_labels(category_names)
-    #names = [cat_to_name[c] for c in classes]
+    names = [cat_to_name[c] for c in classes]
 
-    print("Outputs:")
-    print(probs, classes)
+    print('Classes          :', names)
+    print('Probabilities (%):', [float(round(p * 100.0, 2)) for p in probs])
+
+    print("Top most likely class:", names[0])
+
+    #print("Outputs:")
+    #print(probs, classes)
     #helper.recon(image_path, probs, classes, cat_to_name)
 
 

@@ -36,21 +36,28 @@ def imshow(image, ax=None, title=None):
 
     return ax
 
-def predict(image_path, model, class_to_idx, top_k, device):
+def predict(image_path, model, class_to_idx, top_k, device = 'cpu'):
     '''
     Predict the class (or classes) of an image using a trained deep learning model.
     '''
     # Implement the code to predict the class from an image file
-    model.to(device)
-    model.eval() #Set model in evaluation mode
-
     # Processing the image
-    image_torch1 = utilities.process_image(image_path)
-    image_torch2 = torch.from_numpy(image_torch1).type(torch.FloatTensor)
-    image_torch3 = image_torch2.unsqueeze_(0)
+    processed_image = utilities.process_image(image_path).squeeze()
+
+    #Set model in evaluation mode
+    model.eval()
+
+    # change to cuda
+    if device == 'gpu':
+        model = model.cuda()
 
     with torch.no_grad():
-        logpt = model.forward(image_torch3)
+        if device == 'gpu':
+            logpt = model.forward(torch.from_numpy(
+                processed_image).float().cuda().unsqueeze_(0))
+        else:
+            logpt = model.forward(torch.from_numpy(
+                processed_image).float().unsqueeze_(0))
         pt = torch.exp(logpt)
         top_p, top_class = pt.topk(top_k, dim=1)
 

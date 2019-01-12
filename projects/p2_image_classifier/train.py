@@ -34,7 +34,7 @@ def main():
     data_dir = in_args.data_dir
     arch = in_args.arch #supports only vgg and densenet
     save_dir = in_args.save_dir
-    device = 'gpu' if in_args.gpu == 'gpu' else 'cpu'
+    device = 'gpu' if in_args.gpu else 'cpu'
 
     if arch not in ['VGG', 'DenseNet']:
         raise Exception("Code only supports VGG and DenseNet. This architecture is not supported!")
@@ -90,7 +90,7 @@ def main():
 
     # Save the checkpoint
     checkpoint = {'architecture': model_name,
-              'model': model,
+              #'model': model,
               'input_size': input_size,
               'hidden_layers': hidden_layers,
               'output_size': output_size,
