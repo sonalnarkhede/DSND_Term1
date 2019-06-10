@@ -9,4 +9,4 @@ The project is broken down into multiple steps:
 - Train the image classifier on your dataset
 - Use the trained classifier to predict image content
 
-This project uses PyTorch and the torchvision package; the Jupyter Notebook walks through the implementation of the image classifier and shows an example of the classifier's prediction on a test image. The classifier was also converted into a python application which could be run from command line using "train.py" and "predict.py".
+This project uses PyTorch and the torchvision package; the Jupyter Notebook (Image Classifier Project.ipynb) walks through the implementation of the image classifier and shows an example of the classifier's prediction on a test image. The classifier was also converted into a python application which could be run from command line using "train.py" and "predict.py".
